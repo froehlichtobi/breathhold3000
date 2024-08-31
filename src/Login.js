@@ -20,7 +20,7 @@ const Login = () => {
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
+        placeholder="Email address"
       />
       <input
         type="password"

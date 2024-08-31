@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { signUpWithEmail } from "./auth";
 
 const SignUp = () => {
-  const [email, setEmail] = useState("Enter valid email");
-  const [password, setPassword] = useState("Enter password");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSignUp = () => {
     signUpWithEmail(email, password);
@@ -16,7 +16,7 @@ const SignUp = () => {
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        placeholder="Email"
+        placeholder="Email address"
       />
       <input
         type="password"
