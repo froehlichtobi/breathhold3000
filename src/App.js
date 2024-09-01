@@ -1,21 +1,25 @@
 import React, { useState } from "react";
-import SignUp from "./components/SignUp";
-import Login from "./components/Login";
+import AuthPage from "./components/AuthPage";
 import "./App.css";
 
-function App() {
+const App = () => {
+  const [isGuest, setGuest] = useState(false);
+
   return (
     <div className="App">
-      <h1>BreathHold3000</h1>
-      <h2>
-        Hello Everyone!<br></br>If you want to save your data and look at your
-        stats and improvement go ahead and create an account, if not, you can
-        just continue as a guest.
-      </h2>
-      <SignUp />
-      <Login />
+      <h1>
+        <a
+          href="#"
+          onClick={() => window.location.reload()}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          BreathHold3000
+        </a>
+      </h1>
+      {!isGuest && <AuthPage setGuest={setGuest} />}
+      {isGuest && <h2>Welcome, Guest!</h2>}
     </div>
   );
-}
+};
 
 export default App;
