@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { logInWithEmail, signInWithGoogle } from "./auth";
+import { logInWithEmail, signInWithGoogle } from "../authentication/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");

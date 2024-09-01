@@ -22,4 +22,4 @@ const signInWithGoogle = () => {
   return signInWithPopup(auth, googleProvider);
 };
 
-export { auth, googleProvider, signInWithGoogle, signInWithPopup };
+export { app, auth, googleProvider, signInWithGoogle, signInWithPopup };
