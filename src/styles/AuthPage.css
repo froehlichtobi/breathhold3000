@@ -1,0 +1,17 @@
+input {
+    border-color: var(--light-gray);
+    border: 2px solid var(--light-gray);
+    border-radius: 2px;
+    box-shadow: none;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    margin: 2px 2px;
+    transition: border-color 0.2s ease;
+
+}
+
+input:focus {
+    border-color: var(--dark-blue);
+    box-shadow: inset 0 0 0 1px var(--dark-blue);
+
+}

@@ -42,7 +42,7 @@ const SignUp = () => {
         onChange={(e) => setPasswordRepeated(e.target.value)}
         placeholder="Repeat Password"
       />
-      <button onClick={handleSignUp}>Sign Up</button>
+      <button onClick={handleSignUp}>SIGN UP</button>
     </div>
   );
 };

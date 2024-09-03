@@ -2,6 +2,7 @@ import React from "react";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import Guest from "./Guest";
+import "../styles/AuthPage.css";
 
 const AuthPage = ({ setGuest }) => {
   return (

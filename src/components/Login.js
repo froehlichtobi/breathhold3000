@@ -29,8 +29,8 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
       />
-      <button onClick={handleLogin}>Login</button>
-      <button onClick={handleGoogleSignIn}>Sign in with Google</button>
+      <button onClick={handleLogin}>LOGIN</button>
+      <button onClick={handleGoogleSignIn}>SIGN IN WITH GOOGLE</button>
     </div>
   );
 };

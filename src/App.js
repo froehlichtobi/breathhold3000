@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AuthPage from "./components/AuthPage";
-import "./App.css";
+import "./styles/App.css";
 
 const App = () => {
   const [isGuest, setGuest] = useState(false);
