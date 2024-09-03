@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AuthPage from "./components/AuthPage";
 import "./styles/App.css";
+import MaxBreathHold from "./MaxBreathHold";
 
 const App = () => {
   const [isGuest, setGuest] = useState(false);
@@ -18,6 +19,7 @@ const App = () => {
       </h1>
       {!isGuest && <AuthPage setGuest={setGuest} />}
       {isGuest && <h2>Welcome, Guest!</h2>}
+      <MaxBreathHold />
     </div>
   );
 };
