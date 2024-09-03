@@ -25,6 +25,7 @@ const MaxBreathHold = () => {
     
       const stopTimer = () => {
         setActive(false);
+        console.log(seconds);
       };
     
       const resetTimer = () => {
