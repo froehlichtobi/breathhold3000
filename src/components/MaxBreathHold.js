@@ -43,6 +43,4 @@ const MaxBreathHold = () => {
     )
 }
 
-
-
 export default MaxBreathHold;

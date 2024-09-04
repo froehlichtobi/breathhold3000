@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import AuthPage from "./components/AuthPage";
 import "./styles/App.css";
-import MaxBreathHold from "./MaxBreathHold";
+import MaxBreathHold from "./components/MaxBreathHold";
+import TimerDown from "./logic/TimerDown";
 
 const App = () => {
   const [isGuest, setGuest] = useState(false);
@@ -20,6 +21,7 @@ const App = () => {
       {!isGuest && <AuthPage setGuest={setGuest} />}
       {isGuest && <h2>Welcome, Guest!</h2>}
       <MaxBreathHold />
+      <TimerDown startingTime={1000}/>
     </div>
   );
 };
