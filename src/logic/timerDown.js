@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const TimerDown = ( {startingTime} ) => {
+const timerDown = ( {startingTime} ) => {
     const[seconds, setSeconds] = useState(startingTime);
     const[active, setActive] = useState(false);
 
@@ -21,15 +21,6 @@ const TimerDown = ( {startingTime} ) => {
     const startTimer = () => setActive(true);
     const stopTimer = () => setActive(false);
     
-   // return { seconds, startTimer, stopTimer };
-   return (
-    <div>
-      <h1>Time left: {seconds}s</h1>
-      <button onClick={startTimer}>Start</button>
-      <button onClick={stopTimer}>Stop</button>
-    </div>
-  );
-};
-
-
-export default TimerDown;
+  return { seconds, active, startTimer, stopTimer };
+  }
+export default timerDown;
