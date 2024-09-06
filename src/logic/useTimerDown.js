@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const timerDown = ( {startingTime} ) => {
+const useTimerDown = (startingTime = 60) => {
     const[seconds, setSeconds] = useState(startingTime);
     const[active, setActive] = useState(false);
 
@@ -23,4 +23,4 @@ const timerDown = ( {startingTime} ) => {
     
   return { seconds, active, startTimer, stopTimer };
   }
-export default timerDown;
+export default useTimerDown;

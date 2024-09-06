@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import breathTraining from "../logic/breathTraining";
+import useBreathTraining from "../logic/useBreathTraining";
 
 const BreathTrainingComponent = ( {currentTrainingTime }) => {
-    const { seconds, trainingStarted, finished, startTraining } = breathTraining(currentTrainingTime);
+    
+    const { seconds, trainingStarted, finished, startTraining } = 
+    useBreathTraining(currentTrainingTime);
 
     return(
         <div>

@@ -21,7 +21,7 @@ const App = () => {
       {!isGuest && <AuthPage setGuest={setGuest} />}
       {isGuest && <h2>Welcome, Guest!</h2>}
       <MaxBreathHold />
-      <BreathTrainingComponent currentTrainingTime={60}/>
+      <BreathTrainingComponent currentTrainingTime={3}/>
     </div>
   );
 };
