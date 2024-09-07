@@ -62,7 +62,14 @@ const useBreathTraining = (currentTrainingTime = 60) => {
     setNewSeconds,
   ]);
 
-  return { seconds, trainingStarted, finished, timerIndex, startTraining };
+  return {
+    seconds,
+    trainingStarted,
+    finished,
+    timerIndex,
+    timerSeconds,
+    startTraining,
+  };
 };
 
 export default useBreathTraining;

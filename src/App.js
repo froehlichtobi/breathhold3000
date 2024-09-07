@@ -20,8 +20,8 @@ const App = () => {
       </h1>
       {!isGuest && <AuthPage setGuest={setGuest} />}
       {isGuest && <h2>Welcome, Guest!</h2>}
-      <MaxBreathHold />
-      <BreathTrainingComponent currentTrainingTime={40} />
+      {isGuest && <MaxBreathHold />}
+      {isGuest && <BreathTrainingComponent currentTrainingTime={40} />}
     </div>
   );
 };
