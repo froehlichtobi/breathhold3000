@@ -63,7 +63,7 @@ const BreathTrainingComponent = ({ currentTrainingTime }) => {
                   <h2
                     style={{
                       color: "red",
-                      opacity: timerIndex % 2 === 1 ? "100%" : "20%",
+                      opacity: timerIndex % 2 === 0 && trainingStarted ? "100%" : "20%",
                     }}
                   >
                     Hold your Breath!
@@ -71,7 +71,7 @@ const BreathTrainingComponent = ({ currentTrainingTime }) => {
                   <h2
                     style={{
                       color: "green",
-                      opacity: timerIndex % 2 === 1 ? "25%" : "100%",
+                      opacity: timerIndex % 2 === 1 && trainingStarted ? "100%" : "25%",
                     }}
                   >
                     Breathe!
