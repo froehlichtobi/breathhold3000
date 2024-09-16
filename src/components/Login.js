@@ -4,9 +4,10 @@ import { logInWithEmail, signInWithGoogle } from "../authentication/auth";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorLogin, setErrorLogin] = useState ("");
 
   const handleLogin = () => {
-    logInWithEmail(email, password);
+    logInWithEmail(email, password, setErrorLogin);
   };
 
   const handleGoogleSignIn = () => {
@@ -31,6 +32,7 @@ const Login = () => {
       />
       <button onClick={handleLogin}>LOGIN</button>
       <button onClick={handleGoogleSignIn}>SIGN IN WITH GOOGLE</button>
+      <h4>{errorLogin}</h4>
     </div>
   );
 };

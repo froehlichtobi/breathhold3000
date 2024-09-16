@@ -10,7 +10,7 @@ const AuthPage = ({ setGuest }) => {
       <h2>
         Welcome to Breathhold3000!
         <br />
-        Improve your breathhold and enjoy longer dives!
+        Improve your breathhold!
       </h2>
       <h3>
         If you want to save your progress and personal records log in or create
