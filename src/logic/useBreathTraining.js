@@ -31,7 +31,12 @@ const useBreathTraining = (currentTrainingTime = 60) => {
   const startTraining = () => {
     setTrainingStarted(true);
     startTimer();
-    console.log("first timer started!, timerindex: " + timerIndex + " timertime: " + timerTime);
+    console.log(
+      "first timer started!, timerindex: " +
+        timerIndex +
+        " timertime: " +
+        timerTime
+    );
   };
 
   useEffect(() => {
@@ -56,20 +61,27 @@ const useBreathTraining = (currentTrainingTime = 60) => {
     timerTime,
     startTimer,
     stopTimer,
-    setNewSeconds
+    setNewSeconds,
   ]);
 
-
-  // second useEffect is to update the timerTime correctly 
+  // second useEffect is to update the timerTime correctly
   // because otherwise with only the first one it would have been updated one render too late
   // did not 100% understand it, but i guess it's because useEffect only effects things once they have been rendered again?
-useEffect(() => {
-  if(trainingStarted && !active && !finished) {
-    const nextTimerTime = timerSeconds[timerIndex] * timeFactor;
-    setNewSeconds(nextTimerTime);
-    startTimer();
-  }
-}, [timerIndex, trainingStarted, setNewSeconds, startTimer, timerSeconds, active, finished]);
+  useEffect(() => {
+    if (trainingStarted && !active && !finished) {
+      const nextTimerTime = timerSeconds[timerIndex] * timeFactor;
+      setNewSeconds(nextTimerTime);
+      startTimer();
+    }
+  }, [
+    timerIndex,
+    trainingStarted,
+    setNewSeconds,
+    startTimer,
+    timerSeconds,
+    active,
+    finished,
+  ]);
 
   return {
     seconds,
