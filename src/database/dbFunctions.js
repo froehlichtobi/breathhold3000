@@ -9,7 +9,7 @@ import {
 } from "firebase/firestore";
 import { db } from "./dbFirestore";
 
-const checkForUser = async (userUid) => {
+const checkForUser = async (userUid, setUsernameNeeded) => {
   const docRef = doc(db, "userData", userUid);
 
   try {
@@ -32,29 +32,23 @@ const checkForUser = async (userUid) => {
       });
       console.log("User created in the database with default values.");
     }
+
+    //at this point there is a document in the db of the user, now check if user has a username
+    let username = docSnap.data().username;
+    if (username === "") {
+      setUsernameNeeded(true);
+    }
   } catch (error) {
     console.error("Error checking user in Firestore:", error);
   }
 };
 
 export default checkForUser;
-/*
-const docRef = doc(db, "userData", "user0");
-const docSnap = await getDoc(docRef);
 
-const saveAccountInDatabase = (userUid) => {
-  console.log("test" + userUid);
+export const createUserName = async (userUid, username) => {
+  // should not need to check if this file exists, because that already happened in prev function
+  const docRef = doc(db, "userData", userUid);
+  const docSnap = await getDoc(docRef);
+  await updateDoc(docRef, { username: username });
+  console.log("Username set to: " + docSnap.data().username);
 };
-
-export default saveAccountInDatabase;
-
-/* const fetchData = async () => {
-    const docRef = doc(db, "userData", "user0");
-    const docSnap = await getDoc(docRef);
-  };
-
-  console.log(
-    "HALLO DAS HIER IST DAS: " +
-      docSnap.data().currentTrainingTime +
-      "s UND HIER HÖRTS AUF"
-  ); */

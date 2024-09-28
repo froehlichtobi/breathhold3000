@@ -9,11 +9,13 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./authentication/firebaseAuth";
 import { db } from "./database/dbFirestore";
 import checkForUser from "./database/dbFunctions";
+import Username from "./components/Username";
 
 const App = () => {
   const [isGuest, setGuest] = useState(false);
   const [user, setUser] = useState(null);
   const [userUid, setUserUid] = useState(null);
+  const [usernameNeeded, setUsernameNeeded] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -23,7 +25,7 @@ const App = () => {
 
     return () => unsubscribe(); // unsubscribe will stop the useEffect "listener", this would happen if App would be dismounted (as far as i understood this)
   }, []);
-  checkForUser(userUid);
+  checkForUser(userUid, setUsernameNeeded);
 
   return (
     <div className="App">
@@ -36,6 +38,9 @@ const App = () => {
           BreathHold3000
         </a>
       </h1>
+      {usernameNeeded && (
+        <Username setUsernameNeeded={setUsernameNeeded} userUid={userUid} />
+      )}
       {!isGuest && !user && <AuthPage setGuest={setGuest} />}
       {isGuest && <h2>Welcome, Guest!</h2>}
       {(isGuest || user) && <MaxBreathHold />}
