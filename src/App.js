@@ -25,7 +25,12 @@ const App = () => {
 
     return () => unsubscribe(); // unsubscribe will stop the useEffect "listener", this would happen if App would be dismounted (as far as i understood this)
   }, []);
-  checkForUser(userUid, setUsernameNeeded);
+
+  useEffect(() => {
+    if (userUid) {
+      checkForUser(userUid, setUsernameNeeded);
+    }
+  }, [userUid]);
 
   return (
     <div className="App">

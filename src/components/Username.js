@@ -7,7 +7,6 @@ const Username = ({ setUsernameNeeded, userUid }) => {
   const handleSetUsername = () => {
     createUserName(userUid, username);
     setUsernameNeeded(false);
-    window.location.reload();
   };
   return (
     <div>

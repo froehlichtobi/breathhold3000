@@ -50,5 +50,4 @@ export const createUserName = async (userUid, username) => {
   const docRef = doc(db, "userData", userUid);
   const docSnap = await getDoc(docRef);
   await updateDoc(docRef, { username: username });
-  console.log("Username set to: " + docSnap.data().username);
 };
