@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import useTimerDown from "./useTimerDown";
 
 const useBreathTraining = (currentTrainingTime = 60) => {
-  //check if it is 0 before calling, or inside here?
+  // check if it is 0 before calling, or inside here?
 
   const [trainingStarted, setTrainingStarted] = useState(false);
   const [finished, setFinished] = useState(false);
@@ -22,7 +22,7 @@ const useBreathTraining = (currentTrainingTime = 60) => {
     currentTrainingTime,
   ];
 
-  const timeFactor = 20;
+  const timeFactor = 1000;
   const timerTime = timerSeconds[timerIndex] * timeFactor;
 
   const { seconds, active, startTimer, stopTimer, setNewSeconds } =

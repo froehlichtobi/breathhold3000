@@ -15,8 +15,9 @@ const App = () => {
   const [isGuest, setGuest] = useState(false);
   const [user, setUser] = useState(null);
   const [userUid, setUserUid] = useState(null);
-  const [usernameNeeded, setUsernameNeeded] = useState(false);
+  const [username, setUsername] = useState(null);
 
+  // check if user logs in
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
@@ -28,7 +29,7 @@ const App = () => {
 
   useEffect(() => {
     if (userUid) {
-      checkForUser(userUid, setUsernameNeeded);
+      checkForUser(userUid, setUsername);
     }
   }, [userUid]);
 
@@ -43,9 +44,10 @@ const App = () => {
           BreathHold3000
         </a>
       </h1>
-      {usernameNeeded && (
-        <Username setUsernameNeeded={setUsernameNeeded} userUid={userUid} />
-      )}
+      {user && <h1>{username}</h1>}
+      {!user && <h1>not logged in</h1>}
+      {user && <LogOut />}
+      {!username && <Username setUsername={setUsername} userUid={userUid} />}
       {!isGuest && !user && <AuthPage setGuest={setGuest} />}
       {isGuest && <h2>Welcome, Guest!</h2>}
       {(isGuest || user) && <MaxBreathHold />}
@@ -53,9 +55,6 @@ const App = () => {
         <BreathTrainingComponent currentTrainingTime={40} />
       )}
       <PostTrainingDifficultySelector />
-      {user && <h1>{user.email}</h1>}
-      {!user && <h1>not logged in</h1>}
-      {user && <LogOut />}
     </div>
   );
 };

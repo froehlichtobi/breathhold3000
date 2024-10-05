@@ -11,6 +11,9 @@ const BreathTrainingComponent = ({ currentTrainingTime }) => {
     startTraining,
   } = useBreathTraining(currentTrainingTime);
 
+  // format seconds in order to display it correctly
+  let displayseconds = (seconds / 1000).toFixed(1);
+
   return (
     <div>
       <h1>breath training</h1>
@@ -63,7 +66,10 @@ const BreathTrainingComponent = ({ currentTrainingTime }) => {
                   <h2
                     style={{
                       color: "red",
-                      opacity: timerIndex % 2 === 0 && trainingStarted ? "100%" : "20%",
+                      opacity:
+                        timerIndex % 2 === 0 && trainingStarted
+                          ? "100%"
+                          : "20%",
                     }}
                   >
                     Hold your Breath!
@@ -71,13 +77,17 @@ const BreathTrainingComponent = ({ currentTrainingTime }) => {
                   <h2
                     style={{
                       color: "green",
-                      opacity: timerIndex % 2 === 1 && trainingStarted ? "100%" : "25%",
+                      opacity:
+                        timerIndex % 2 === 1 && trainingStarted
+                          ? "100%"
+                          : "25%",
                     }}
                   >
                     Breathe!
                   </h2>
 
-                  <h2>Time left: {seconds}s</h2>
+                  <h2>Time left:</h2>
+                  <h2 className="timer">{displayseconds} s</h2>
                   {!trainingStarted && (
                     <button onClick={startTraining}>Start Training</button>
                   )}

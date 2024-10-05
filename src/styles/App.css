@@ -32,3 +32,8 @@ button {
   color: white;
   font-family: 'Poppins', sans-serif;
 }
+
+.timer {
+  width: 100 px;
+  text-align: center;
+}
