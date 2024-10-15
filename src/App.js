@@ -47,7 +47,9 @@ const App = () => {
       {user && <h1>{username}</h1>}
       {!user && <h1>not logged in</h1>}
       {user && <LogOut />}
-      {!username && <Username setUsername={setUsername} userUid={userUid} />}
+      {!username && user && !isGuest && (
+        <Username setUsername={setUsername} userUid={userUid} />
+      )}
       {!isGuest && !user && <AuthPage setGuest={setGuest} />}
       {isGuest && <h2>Welcome, Guest!</h2>}
       {(isGuest || user) && <MaxBreathHold />}
