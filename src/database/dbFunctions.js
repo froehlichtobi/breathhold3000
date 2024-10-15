@@ -52,3 +52,18 @@ export const createUserName = async (userUid, username) => {
   const docSnap = await getDoc(docRef);
   await updateDoc(docRef, { username: username });
 };
+
+export const getMaxBreathTime = async (userUid) => {
+  // should not need to check if this file exists, because that already happened in prev function
+  const docRef = doc(db, "userData", userUid);
+  const docSnap = await getDoc(docRef);
+
+  console.log("maxtime in da function" + docSnap.data().maxTime);
+  let maxTimeUser = await docSnap.data().maxTime;
+  return maxTimeUser;
+};
+
+export const fetchMaxTime = async (userUid) => {
+  const maxTimeFromDb = await getMaxBreathTime(userUid);
+  console.log("gehts jetztt?: " + maxTimeFromDb);
+};

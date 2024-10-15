@@ -8,26 +8,26 @@ const MaxBreathHold = () => {
   // the longer the timer runs. --> so now I'm changing that to using the Date.now() and calculating the time difference
   // Date.now() returns the milliseconds that have passed since January 1, 1970, UTC at midnight
 
-  const [startingTime, setStartingTime] = useState(null);
+  const [startTime, setStartTime] = useState(null);
 
   useEffect(() => {
     let interval = null;
 
     if (active) {
-      if (!startingTime) {
-        setStartingTime(Date.now());
+      if (!startTime) {
+        setStartTime(Date.now());
       }
-      // update seconds every 100 milliseconds, get elapsed time by comparing Date.now() to startingTime
+      // update seconds every 100 milliseconds, get elapsed time by comparing Date.now() to startTime
       interval = setInterval(() => {
-        setSeconds(Date.now() - startingTime);
+        setSeconds(Date.now() - startTime);
       }, 100);
     } else if (!active && seconds !== 0) {
       clearInterval(interval);
     }
 
     return () => clearInterval(interval);
-  }, [active, seconds, startingTime]);
-  // before adding startingTime into the dependencies there was a split second
+  }, [active, seconds, startTime]);
+  // before adding startTime into the dependencies there was a split second
   // in which the timer showed the actual value of Date.now (1728131359333) before counting correctly -> interesting
 
   const startTimer = () => {
@@ -41,7 +41,7 @@ const MaxBreathHold = () => {
 
   const resetTimer = () => {
     setSeconds(0);
-    setStartingTime(null);
+    setStartTime(null);
     setActive(false);
   };
 

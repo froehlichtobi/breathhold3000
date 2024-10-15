@@ -10,6 +10,7 @@ import { auth } from "./authentication/firebaseAuth";
 import { db } from "./database/dbFirestore";
 import checkForUser from "./database/dbFunctions";
 import Username from "./components/Username";
+import { fetchMaxTime } from "./database/dbFunctions";
 
 const App = () => {
   const [isGuest, setGuest] = useState(false);
@@ -30,6 +31,8 @@ const App = () => {
   useEffect(() => {
     if (userUid) {
       checkForUser(userUid, setUsername);
+
+      fetchMaxTime(userUid);
     }
   }, [userUid]);
 
@@ -45,17 +48,25 @@ const App = () => {
         </a>
       </h1>
       {user && <h1>{username}</h1>}
+
       {!user && <h1>not logged in</h1>}
+
       {user && <LogOut />}
+
       {!username && user && !isGuest && (
         <Username setUsername={setUsername} userUid={userUid} />
       )}
+
       {!isGuest && !user && <AuthPage setGuest={setGuest} />}
+
       {isGuest && <h2>Welcome, Guest!</h2>}
+
       {(isGuest || user) && <MaxBreathHold />}
+
       {(isGuest || user) && (
         <BreathTrainingComponent currentTrainingTime={40} />
       )}
+
       <PostTrainingDifficultySelector />
     </div>
   );
