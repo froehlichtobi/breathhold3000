@@ -46,6 +46,7 @@ const MaxBreathHold = ({ maxHoldTime, userUid }) => {
     setSeconds(0);
     setStartTime(null);
     setActive(false);
+    setNewRecord(false);
   };
 
   const checkForNewRecord = () => {
@@ -63,7 +64,9 @@ const MaxBreathHold = ({ maxHoldTime, userUid }) => {
   return (
     <div>
       <h2>Test your max. breathhold time!</h2>
-      <h1 className="timer">{displayseconds} s</h1>
+      <h1 className="timer" style={{ color: newRecord ? "green" : "white" }}>
+        {displayseconds} s
+      </h1>
       {!showReset && <button onClick={startTimer}>Start</button>}
       {!showReset && <button onClick={stopTimer}>Stop</button>}
       {showReset && <button onClick={resetTimer}>Reset</button>}
