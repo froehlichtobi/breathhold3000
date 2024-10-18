@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from "react";
-import AuthPage from "./components/AuthPage";
-import LogOut from "./components/LogOut";
 import "./styles/App.css";
-import MaxBreathHold from "./components/MaxBreathHold";
-import BreathTrainingComponent from "./components/BreathTrainingComponent";
-import PostTrainingDifficultySelector from "./components/PostTrainingDifficultySelector";
+import {
+  AuthPage,
+  BreathTrainingComponent,
+  Footer,
+  LogOut,
+  MaxBreathHold,
+  PostTrainingDifficultySelector,
+  Username,
+} from "./components";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./authentication/firebaseAuth";
 import { db } from "./database/dbFirestore";
-import checkForUser from "./database/dbFunctions";
-import Username from "./components/Username";
-import { fetchMaxTime } from "./database/dbFunctions";
+import checkForUser, { getMaxBreathTime } from "./database/dbFunctions";
+import { getCurrentTrainingTime } from "./database/dbFunctions";
 
 const App = () => {
   const [isGuest, setGuest] = useState(false);
   const [user, setUser] = useState(null);
   const [userUid, setUserUid] = useState(null);
   const [username, setUsername] = useState(null);
+  const [maxHoldTime, setMaxHoldTime] = useState(null);
+  const [currentTrainingTime, setCurrentTrainingTime] = useState(40);
 
   // check if user logs in
   useEffect(() => {
@@ -24,17 +29,34 @@ const App = () => {
       setUser(user);
       setUserUid(user.uid);
     });
-
     return () => unsubscribe(); // unsubscribe will stop the useEffect "listener", this would happen if App would be dismounted (as far as i understood this)
   }, []);
 
   useEffect(() => {
+    const fetchDataFromDb = async () => {
+      let trainingTime = await getCurrentTrainingTime(userUid);
+      setCurrentTrainingTime(trainingTime);
+      let maxTime = await getMaxBreathTime(userUid);
+      setMaxHoldTime(maxTime);
+    };
     if (userUid) {
       checkForUser(userUid, setUsername);
-
-      fetchMaxTime(userUid);
+      fetchDataFromDb();
     }
   }, [userUid]);
+
+  const renderMaxBreathHold = () => {
+    if (isGuest) {
+      return <MaxBreathHold />;
+    } else if (user) {
+      return (
+        <>
+          <MaxBreathHold />
+          <h2>personal best: {maxHoldTime} s</h2>
+        </>
+      );
+    }
+  };
 
   return (
     <div className="App">
@@ -49,7 +71,7 @@ const App = () => {
       </h1>
       {user && <h1>{username}</h1>}
 
-      {!user && <h1>not logged in</h1>}
+      {!user && !isGuest && <h1>not logged in</h1>}
 
       {user && <LogOut />}
 
@@ -61,13 +83,14 @@ const App = () => {
 
       {isGuest && <h2>Welcome, Guest!</h2>}
 
-      {(isGuest || user) && <MaxBreathHold />}
+      {renderMaxBreathHold()}
 
       {(isGuest || user) && (
-        <BreathTrainingComponent currentTrainingTime={40} />
+        <BreathTrainingComponent currentTrainingTime={currentTrainingTime} />
       )}
 
       <PostTrainingDifficultySelector />
+      <Footer />
     </div>
   );
 };
