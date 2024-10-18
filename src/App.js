@@ -20,7 +20,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [userUid, setUserUid] = useState(null);
   const [username, setUsername] = useState(null);
-  const [maxHoldTime, setMaxHoldTime] = useState(null);
+  const [maxHoldTime, setMaxHoldTime] = useState(0);
   const [currentTrainingTime, setCurrentTrainingTime] = useState(40);
 
   // check if user logs in
@@ -47,11 +47,11 @@ const App = () => {
 
   const renderMaxBreathHold = () => {
     if (isGuest) {
-      return <MaxBreathHold />;
+      return <MaxBreathHold maxHoldTime={maxHoldTime} userUid={userUid} />;
     } else if (user) {
       return (
         <>
-          <MaxBreathHold />
+          <MaxBreathHold maxHoldTime={maxHoldTime} userUid={userUid} />
           <h2>personal best: {maxHoldTime} s</h2>
         </>
       );
@@ -60,18 +60,12 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>
-        <a
-          href="#"
-          onClick={() => window.location.reload()}
-          style={{ textDecoration: "none", color: "inherit" }}
-        >
+      <h1 className="header">
+        <a href="#" onClick={() => window.location.reload()}>
           BreathHold3000
         </a>
       </h1>
       {user && <h1>{username}</h1>}
-
-      {!user && !isGuest && <h1>not logged in</h1>}
 
       {user && <LogOut />}
 

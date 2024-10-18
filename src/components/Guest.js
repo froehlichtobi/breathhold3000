@@ -6,7 +6,9 @@ const Guest = ({ setGuest }) => {
   };
   return (
     <div>
-      <button onClick={handleGuestUser}>CONTINUE AS GUEST</button>
+      <button style={{ marginBottom: "10px" }} onClick={handleGuestUser}>
+        CONTINUE AS GUEST
+      </button>
     </div>
   );
 };

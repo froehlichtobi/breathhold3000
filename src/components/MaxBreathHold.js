@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { setNewMaxTime } from "../database/dbFunctions";
 
-const MaxBreathHold = () => {
+const MaxBreathHold = ({ maxHoldTime, userUid }) => {
   const [seconds, setSeconds] = useState(0);
   const [active, setActive] = useState(false);
   // first I tried to create the timer simply by adding 100 milliseconds every 100 milliseconds using the setInterval() function
@@ -9,6 +10,7 @@ const MaxBreathHold = () => {
   // Date.now() returns the milliseconds that have passed since January 1, 1970, UTC at midnight
 
   const [startTime, setStartTime] = useState(null);
+  const [newRecord, setNewRecord] = useState(false);
 
   useEffect(() => {
     let interval = null;
@@ -36,6 +38,7 @@ const MaxBreathHold = () => {
 
   const stopTimer = () => {
     setActive(false);
+    checkForNewRecord();
     console.log(seconds);
   };
 
@@ -45,6 +48,12 @@ const MaxBreathHold = () => {
     setActive(false);
   };
 
+  const checkForNewRecord = () => {
+    if (seconds / 1000 > maxHoldTime) {
+      console.log("new record");
+      setNewRecord(true);
+    }
+  };
   // format seconds in order to display it correctly
   let displayseconds = (seconds / 1000).toFixed(1);
 
@@ -58,6 +67,11 @@ const MaxBreathHold = () => {
       {!showReset && <button onClick={startTimer}>Start</button>}
       {!showReset && <button onClick={stopTimer}>Stop</button>}
       {showReset && <button onClick={resetTimer}>Reset</button>}
+      {newRecord && (
+        <button onClick={() => setNewMaxTime(userUid, displayseconds)}>
+          Confirm new PB!
+        </button>
+      )}
     </div>
   );
 };

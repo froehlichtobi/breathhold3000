@@ -70,3 +70,11 @@ export const getCurrentTrainingTime = async (userUid) => {
   let trainingTimeCurrent = docSnap.data().currentTrainingTime;
   return trainingTimeCurrent;
 };
+
+export const setNewMaxTime = async (userUid, seconds) => {
+  // should not need to check if this file exists, because that already happened in prev function
+  const docRef = doc(db, "userData", userUid);
+  const docSnap = await getDoc(docRef);
+  await updateDoc(docRef, { maxTime: seconds });
+  window.location.reload();
+};

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { signUpWithEmail } from "../authentication/auth";
 
 const SignUp = () => {
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeated, setPasswordRepeated] = useState("");
@@ -18,13 +17,7 @@ const SignUp = () => {
 
   return (
     <div>
-      <h2>Sign Up</h2>
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Username"
-      />
+      <h2 style={{ marginBottom: "10px" }}>Sign Up</h2>
       <input
         type="email"
         value={email}
@@ -43,6 +36,7 @@ const SignUp = () => {
         onChange={(e) => setPasswordRepeated(e.target.value)}
         placeholder="Repeat Password"
       />
+      <br />
       <button onClick={handleSignUp}>SIGN UP</button>
       <h4>{errorSignUp}</h4>
     </div>
