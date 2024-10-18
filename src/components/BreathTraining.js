@@ -1,7 +1,7 @@
 import React from "react";
 import useBreathTraining from "../logic/useBreathTraining";
 
-const BreathTrainingComponent = ({ currentTrainingTime }) => {
+const BreathTraining = ({ currentTrainingTime }) => {
   const {
     seconds,
     trainingStarted,
@@ -101,4 +101,4 @@ const BreathTrainingComponent = ({ currentTrainingTime }) => {
   );
 };
 
-export default BreathTrainingComponent;
+export default BreathTraining;

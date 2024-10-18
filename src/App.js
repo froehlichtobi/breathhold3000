@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./styles/App.css";
 import {
   AuthPage,
-  BreathTrainingComponent,
+  BreathTraining,
   Footer,
   LogOut,
   MaxBreathHold,
@@ -22,6 +22,7 @@ const App = () => {
   const [username, setUsername] = useState(null);
   const [maxHoldTime, setMaxHoldTime] = useState(0);
   const [currentTrainingTime, setCurrentTrainingTime] = useState(40);
+  const [selectedTraining, setSelectedTraining] = useState(null);
 
   // check if user logs in
   useEffect(() => {
@@ -30,7 +31,7 @@ const App = () => {
       setUserUid(user.uid);
     });
     return () => unsubscribe(); // unsubscribe will stop the useEffect "listener", this would happen if App would be dismounted (as far as i understood this)
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     const fetchDataFromDb = async () => {
@@ -43,21 +44,61 @@ const App = () => {
       checkForUser(userUid, setUsername);
       fetchDataFromDb();
     }
-  }, [userUid]);
+  }, [user, username]);
 
-  const renderMaxBreathHold = () => {
-    if (isGuest) {
-      return <MaxBreathHold maxHoldTime={maxHoldTime} userUid={userUid} />;
-    } else if (user) {
+  const renderSelector = () => {
+    if (isGuest || user) {
       return (
         <>
-          <MaxBreathHold maxHoldTime={maxHoldTime} userUid={userUid} />
-          <h2>personal best: {maxHoldTime} s</h2>
+          <button
+            style={{ padding: "25px", marginBottom: "5px", width: "200px" }}
+            onClick={() => setSelectedTraining(1)}
+          >
+            MAX HOLD TEST
+          </button>
+          <button
+            style={{ padding: "25px", marginBottom: "5px", width: "200px" }}
+            onClick={() => setSelectedTraining(2)}
+          >
+            BREATH TRAINING
+          </button>
         </>
       );
     }
   };
+  const renderMaxBreathHold = () => {
+    if (selectedTraining === 1) {
+      if (isGuest) {
+        return <MaxBreathHold maxHoldTime={maxHoldTime} userUid={userUid} />;
+      } else if (user) {
+        return (
+          <>
+            <MaxBreathHold maxHoldTime={maxHoldTime} userUid={userUid} />
+            <h2>personal best: {maxHoldTime} s</h2>
+          </>
+        );
+      }
+    }
+  };
 
+  const renderBreathTraining = () => {
+    if (selectedTraining === 2) {
+      if (isGuest || user) {
+        return (
+          <>
+            <BreathTraining currentTrainingTime={currentTrainingTime} />
+            <PostTrainingDifficultySelector />
+          </>
+        );
+      }
+    }
+  };
+
+  const renderAuthPage = () => {
+    if (!isGuest && !user) {
+      return <AuthPage setGuest={setGuest} />;
+    }
+  };
   return (
     <div className="App">
       <h1 className="header">
@@ -73,17 +114,16 @@ const App = () => {
         <Username setUsername={setUsername} userUid={userUid} />
       )}
 
-      {!isGuest && !user && <AuthPage setGuest={setGuest} />}
+      {renderAuthPage()}
 
       {isGuest && <h2>Welcome, Guest!</h2>}
 
+      {renderSelector()}
+
       {renderMaxBreathHold()}
 
-      {(isGuest || user) && (
-        <BreathTrainingComponent currentTrainingTime={currentTrainingTime} />
-      )}
+      {renderBreathTraining()}
 
-      <PostTrainingDifficultySelector />
       <Footer />
     </div>
   );
