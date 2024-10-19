@@ -9,7 +9,7 @@ import {
 } from "firebase/firestore";
 import { db } from "./dbFirestore";
 
-const checkForUser = async (userUid, setUsername) => {
+const checkForUser = async (userUid, setUsername, setIsLoadingUsername) => {
   const docRef = doc(db, "userData", userUid);
 
   try {
@@ -37,8 +37,10 @@ const checkForUser = async (userUid, setUsername) => {
     let username = docSnap.data().username;
     if (username === "") {
       setUsername(null);
+    } else {
+      setUsername(username);
     }
-    setUsername(username);
+    setIsLoadingUsername(false);
   } catch (error) {
     console.error("Error checking user in Firestore:", error);
   }

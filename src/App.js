@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./styles/App.css";
+import { useAuthState } from "react-firebase-hooks/auth";
 import {
   AuthPage,
   BreathTraining,
@@ -16,33 +17,31 @@ import { getCurrentTrainingTime } from "./database/dbFunctions";
 
 const App = () => {
   const [isGuest, setGuest] = useState(false);
-  const [user, setUser] = useState(null);
   const [userUid, setUserUid] = useState(null);
   const [username, setUsername] = useState(null);
   const [maxHoldTime, setMaxHoldTime] = useState(0);
   const [currentTrainingTime, setCurrentTrainingTime] = useState(40);
   const [selectedTraining, setSelectedTraining] = useState(null);
+  const [user, loading] = useAuthState(auth);
+  const [isLoadingUsername, setIsLoadingUsername] = useState(true);
 
   // check if user logs in
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+      console.log("user _ " + user);
       setUserUid(user.uid);
+      const fetchDataFromDb = async () => {
+        let trainingTime = await getCurrentTrainingTime(userUid);
+        setCurrentTrainingTime(trainingTime);
+        let maxTime = await getMaxBreathTime(userUid);
+        setMaxHoldTime(maxTime);
+      };
+      if (userUid) {
+        checkForUser(userUid, setUsername, setIsLoadingUsername);
+        fetchDataFromDb();
+      }
     });
     return () => unsubscribe(); // unsubscribe will stop the useEffect "listener", this would happen if App would be dismounted (as far as i understood this)
-  }, [user]);
-
-  useEffect(() => {
-    const fetchDataFromDb = async () => {
-      let trainingTime = await getCurrentTrainingTime(userUid);
-      setCurrentTrainingTime(trainingTime);
-      let maxTime = await getMaxBreathTime(userUid);
-      setMaxHoldTime(maxTime);
-    };
-    if (userUid) {
-      checkForUser(userUid, setUsername);
-      fetchDataFromDb();
-    }
   }, [user, username]);
 
   const renderSelector = () => {
@@ -100,19 +99,19 @@ const App = () => {
       return <AuthPage setGuest={setGuest} />;
     }
   };
-  return (
+  return loading ? (
+    <div />
+  ) : (
     <div className="App">
       <h1 className="header">
-        <a href="#" onClick={() => window.location.reload()}>
-          BreathHold3000
-        </a>
+        <a onClick={() => window.location.reload()}>BreathHold3000</a>
       </h1>
 
-      {user && <h2>Hello, {username}</h2>}
+      {!isLoadingUsername && username && <h2>Hello, {username}</h2>}
 
       {user && <LogOut />}
 
-      {!username && user && !isGuest && (
+      {!isLoadingUsername && !username && user && !isGuest && (
         <Username setUsername={setUsername} userUid={userUid} />
       )}
 
