@@ -11,7 +11,6 @@ import {
 } from "./components";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./authentication/firebaseAuth";
-import { db } from "./database/dbFirestore";
 import checkForUser, { getMaxBreathTime } from "./database/dbFunctions";
 import { getCurrentTrainingTime } from "./database/dbFunctions";
 
@@ -44,7 +43,7 @@ const App = () => {
       }
     });
     return () => unsubscribe(); // unsubscribe will stop the useEffect "listener", this would happen if App would be dismounted (as far as i understood this)
-  }, [user, username]);
+  }, [user, username, userUid]);
 
   const renderSelector = () => {
     if (isGuest || user) {

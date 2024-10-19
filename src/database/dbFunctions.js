@@ -1,12 +1,4 @@
-import {
-  collection,
-  addDoc,
-  getDoc,
-  doc,
-  setDoc,
-  updateDoc,
-  deleteDoc,
-} from "firebase/firestore";
+import { getDoc, doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "./dbFirestore";
 
 const checkForUser = async (userUid, setUsername, setIsLoadingUsername) => {
