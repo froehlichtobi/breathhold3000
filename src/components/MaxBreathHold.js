@@ -68,13 +68,13 @@ const MaxBreathHold = ({ maxHoldTime, userUid }) => {
     <div>
       <h2>Test your max. breathhold time!</h2>
       <h1
-        className="timer"
+        className="timer smoothBorder"
         style={{ color: greenColorLogic ? "green" : "white" }}
       >
         {displayseconds} s
       </h1>
-      {!showReset && <button onClick={startTimer}>Start</button>}
-      {!showReset && <button onClick={stopTimer}>Stop</button>}
+      {!showReset && !active && <button onClick={startTimer}>Start</button>}
+      {!showReset && active && <button onClick={stopTimer}>Stop</button>}
       {showReset && <button onClick={resetTimer}>Reset</button>}
       {newRecord && userUid && (
         <button onClick={() => setNewMaxTime(userUid, displayseconds)}>

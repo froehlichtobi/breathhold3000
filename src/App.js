@@ -6,7 +6,6 @@ import {
   Footer,
   LogOut,
   MaxBreathHold,
-  PostTrainingDifficultySelector,
   Username,
 } from "./components";
 import { onAuthStateChanged } from "firebase/auth";
@@ -51,13 +50,13 @@ const App = () => {
       return (
         <>
           <button
-            style={{ padding: "25px", marginBottom: "5px", width: "200px" }}
+            className="modeSelectorButton"
             onClick={() => setSelectedTraining(1)}
           >
             MAX HOLD TEST
           </button>
           <button
-            style={{ padding: "25px", marginBottom: "5px", width: "200px" }}
+            className="modeSelectorButton"
             onClick={() => setSelectedTraining(2)}
           >
             BREATH TRAINING
@@ -74,7 +73,7 @@ const App = () => {
         return (
           <>
             <MaxBreathHold maxHoldTime={maxHoldTime} userUid={userUid} />
-            <h2>personal best: {maxHoldTime} s</h2>
+            <h2>personal best: &nbsp;{maxHoldTime} s</h2>
           </>
         );
       }
@@ -86,8 +85,10 @@ const App = () => {
       if (isGuest || user) {
         return (
           <>
-            <BreathTraining currentTrainingTime={currentTrainingTime} />
-            <PostTrainingDifficultySelector />
+            <BreathTraining
+              currentTrainingTime={currentTrainingTime}
+              userUid={userUid}
+            />
           </>
         );
       }
@@ -106,7 +107,8 @@ const App = () => {
           BreathHold3000
         </a>
       </h1>
-      {user && <h1>{username}</h1>}
+
+      {user && <h2>Hello, {username}</h2>}
 
       {user && <LogOut />}
 

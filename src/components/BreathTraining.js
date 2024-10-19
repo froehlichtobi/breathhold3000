@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import useBreathTraining from "../logic/useBreathTraining";
+import PostTrainingDifficultySelector from "./PostTrainingDifficultySelector";
+import { setNewTrainingTime } from "../database/dbFunctions";
 
-const BreathTraining = ({ currentTrainingTime }) => {
+const BreathTraining = ({ currentTrainingTime, userUid }) => {
   const {
     seconds,
     trainingStarted,
@@ -11,14 +13,28 @@ const BreathTraining = ({ currentTrainingTime }) => {
     startTraining,
   } = useBreathTraining(currentTrainingTime);
 
+  const [difficulty, setDifficulty] = useState(0);
+
   // format seconds in order to display it correctly
   let displayseconds = (seconds / 1000).toFixed(1);
 
+  let newTrainingTime = currentTrainingTime + difficulty - 1;
+
   return (
     <div>
-      <h1>breath training</h1>
+      <h2>breath training</h2>
       {finished ? (
-        <p>Training complete!</p>
+        <>
+          <p>Training complete!</p>
+          <PostTrainingDifficultySelector setDifficulty={setDifficulty} />
+          {difficulty !== 0 && (
+            <button
+              onClick={() => setNewTrainingTime(userUid, newTrainingTime)}
+            >
+              Confirm new training time: &nbsp; {newTrainingTime}s
+            </button>
+          )}
+        </>
       ) : (
         <div>
           <div
@@ -32,7 +48,7 @@ const BreathTraining = ({ currentTrainingTime }) => {
             <table style={{ width: "50%" }}>
               <thead>
                 <tr>
-                  <th>Times</th>
+                  <th>times</th>
                 </tr>
               </thead>
               <tbody>
@@ -42,7 +58,7 @@ const BreathTraining = ({ currentTrainingTime }) => {
                     style={{
                       backgroundColor:
                         trainingStarted && index === timerIndex
-                          ? "yellow"
+                          ? "var(--dark-blue)"
                           : "transparent",
                       color:
                         trainingStarted && index === timerIndex
@@ -58,7 +74,12 @@ const BreathTraining = ({ currentTrainingTime }) => {
             </table>
 
             {/* Breath training controls on the right */}
-            <div style={{ width: "50%", textAlign: "center" }}>
+            <div
+              style={{
+                width: "50%",
+                textAlign: "center",
+              }}
+            >
               {finished ? (
                 <p>Training complete!</p>
               ) : (

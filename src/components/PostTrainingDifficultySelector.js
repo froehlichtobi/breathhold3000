@@ -1,16 +1,24 @@
-import React, {useState} from "react";
+import React from "react";
 
-const PostTrainingDifficultySelector = () => {
-
-    const [difficulty, setDifficulty] = useState(0);
-    return (
-        <div>
-         <button onClick={() => setDifficulty(1)}>DIFFICULTY 1</button>
-        <button onClick={() => setDifficulty(2)}>DIFFICULTY 2</button>
-        <button onClick={() => setDifficulty(3)}>DIFFICULTY 3</button>
-        <button onClick={() => setDifficulty(4)}>DIFFICULTY 4</button>
-        <h3>Current difficulty: {difficulty}</h3>
-        </div>
-    )
-}
+const PostTrainingDifficultySelector = ({ setDifficulty }) => {
+  return (
+    <div className="difficultySelector">
+      <button onClick={() => setDifficulty(-4)}>
+        VERY HARD
+        <br />- 5 s
+      </button>
+      <button onClick={() => setDifficulty(1)}>
+        HARD <br />+ 0 s
+      </button>
+      <button onClick={() => setDifficulty(6)}>
+        OKAY
+        <br />+ 5 s
+      </button>
+      <button onClick={() => setDifficulty(11)}>
+        EASY
+        <br />+ 10 s
+      </button>
+    </div>
+  );
+};
 export default PostTrainingDifficultySelector;
