@@ -26,7 +26,9 @@ const BreathTraining = ({ currentTrainingTime, userUid }) => {
       {finished ? (
         <>
           <p>Training complete!</p>
-          <PostTrainingDifficultySelector setDifficulty={setDifficulty} />
+          {userUid && (
+            <PostTrainingDifficultySelector setDifficulty={setDifficulty} />
+          )}
           {difficulty !== 0 && (
             <button
               onClick={() => setNewTrainingTime(userUid, newTrainingTime)}

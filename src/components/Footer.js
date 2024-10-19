@@ -4,6 +4,8 @@ const Footer = () => {
   return (
     <div>
       <h4 className="footer">
+        created by Tobias Fröhlich
+        <br />
         <a
           style={{ marginRight: "50px" }}
           href="https://github.com/froehlichtobi"
@@ -15,8 +17,6 @@ const Footer = () => {
           {" "}
           LinkedIn
         </a>
-        <br />
-        created by Tobias Fröhlich
       </h4>
     </div>
   );
