@@ -5,8 +5,13 @@ import {
 } from "firebase/auth";
 
 // sign up with email and password
-export const signUpWithEmail = async (email, password, passwordRepeated, setErrorSignUp) => {
-  if(password === passwordRepeated){
+export const signUpWithEmail = async (
+  email,
+  password,
+  passwordRepeated,
+  setErrorSignUp
+) => {
+  if (password === passwordRepeated) {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -24,7 +29,9 @@ export const signUpWithEmail = async (email, password, passwordRepeated, setErro
           setErrorSignUp("The email address is not valid.");
           break;
         case "auth/weak-password":
-          setErrorSignUp("The password is too weak. Must be at least 6 characters.");
+          setErrorSignUp(
+            "The password is too weak. Must be at least 6 characters."
+          );
           break;
         case "auth/operation-not-allowed":
           setErrorSignUp("Email/password sign-up is disabled.");
@@ -37,13 +44,12 @@ export const signUpWithEmail = async (email, password, passwordRepeated, setErro
           break;
         default:
           setErrorSignUp("An error occurred: " + error.message);
+      }
     }
-  }
-}else {
+  } else {
     console.error("Passwords don't match!");
     setErrorSignUp("Passwords don't match!");
   }
-  
 };
 
 // Log in with email and password
@@ -73,7 +79,9 @@ export const logInWithEmail = async (email, password, setErrorLogin) => {
         setErrorLogin("Too many login attempts. Please try again later.");
         break;
       case "auth/network-request-failed":
-        setErrorLogin("Network error. Please check your connection and try again.");
+        setErrorLogin(
+          "Network error. Please check your connection and try again."
+        );
         break;
       case "auth/missing-password":
         setErrorLogin("Please enter the password.");
@@ -93,5 +101,3 @@ export const signInWithGoogle = async () => {
     console.error("Error logging in with Google:", error.message);
   }
 };
-
-

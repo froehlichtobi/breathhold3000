@@ -15,12 +15,12 @@ const checkForUser = async (userUid, setUsername, setIsLoadingUsername) => {
   try {
     // Fetch the document
     const docSnap = await getDoc(docRef);
-
     // Check if the document exists
     if (docSnap.exists()) {
       console.log("User already exists in the database:", docSnap.data());
     } else {
       console.log("User does not exist, creating a new user in the database.");
+      setIsLoadingUsername(false);
       // Create a new document with default values
       await setDoc(docRef, {
         UID: userUid,

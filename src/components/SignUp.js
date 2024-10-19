@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { signUpWithEmail } from "../authentication/auth";
 
-const SignUp = () => {
+const SignUp = ({ setIsLoadingUsername }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeated, setPasswordRepeated] = useState("");

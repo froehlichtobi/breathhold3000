@@ -4,7 +4,7 @@ import SignUp from "./SignUp";
 import Guest from "./Guest";
 import "../styles/AuthPage.css";
 
-const AuthPage = ({ setGuest }) => {
+const AuthPage = ({ setGuest, setIsLoadingUsername }) => {
   return (
     <div className="authpage">
       <h2>
@@ -17,7 +17,7 @@ const AuthPage = ({ setGuest }) => {
         an account! Else you can continue as a guest and try it out first!
       </h3>
       <Login />
-      <SignUp />
+      <SignUp setIsLoadingUsername={setIsLoadingUsername} />
       <Guest setGuest={setGuest} />
     </div>
   );

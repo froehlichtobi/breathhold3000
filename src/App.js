@@ -27,7 +27,9 @@ const App = () => {
 
   // check if user logs in
   useEffect(() => {
+    console.log("useefefccefefeft");
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log("222useefefccefefeft");
       console.log("user _ " + user);
       setUserUid(user.uid);
       const fetchDataFromDb = async () => {
@@ -96,7 +98,12 @@ const App = () => {
 
   const renderAuthPage = () => {
     if (!isGuest && !user) {
-      return <AuthPage setGuest={setGuest} />;
+      return (
+        <AuthPage
+          setGuest={setGuest}
+          setIsLoadingUsername={setIsLoadingUsername}
+        />
+      );
     }
   };
   return loading ? (
