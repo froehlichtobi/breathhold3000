@@ -25,7 +25,7 @@ const checkForUser = async (userUid, setUsername) => {
       await setDoc(docRef, {
         UID: userUid,
         username: "", // Set a default username or use a parameter to pass the username
-        currentTrainingTime: 60, // Default value
+        currentTrainingTime: 40, // Default value
         trainingTimes: [], // Default array
         maxTime: 0, // Default value
         maxTimes: [], // Default array
