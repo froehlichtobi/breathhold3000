@@ -8,7 +8,6 @@ const LogOut = () => {
       .then(() => {
         console.log("User signed out");
         window.location.reload();
-        // setUser(null); // Reset user state after sign-out
       })
       .catch((error) => {
         console.error("Error signing out: ", error.message);

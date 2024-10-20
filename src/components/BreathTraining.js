@@ -22,7 +22,7 @@ const BreathTraining = ({ currentTrainingTime, userUid }) => {
 
   return (
     <div>
-      <h2>breath training</h2>
+      <h2>breathhold training</h2>
       {finished ? (
         <>
           <p>Training complete!</p>
@@ -50,7 +50,7 @@ const BreathTraining = ({ currentTrainingTime, userUid }) => {
             <table style={{ width: "50%" }}>
               <thead>
                 <tr>
-                  <th>times</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>

@@ -12,7 +12,6 @@ const Login = () => {
 
   const handleGoogleSignIn = () => {
     signInWithGoogle();
-    // on first login user needs to set a username!!
   };
 
   return (

@@ -5,3 +5,4 @@ export { default as LogOut } from "./LogOut";
 export { default as MaxBreathHold } from "./MaxBreathHold";
 export { default as PostTrainingDifficultySelector } from "./PostTrainingDifficultySelector";
 export { default as Username } from "./Username";
+export { default as Header } from "./Header";

@@ -7,10 +7,6 @@ const SignUp = ({ setIsLoadingUsername }) => {
   const [passwordRepeated, setPasswordRepeated] = useState("");
   const [errorSignUp, setErrorSignUp] = useState("");
 
-  // in this order:
-  // check if username or email is already used!!
-  // check if passwords match
-  // if the inputs are valid call signUpWithEmail
   const handleSignUp = () => {
     signUpWithEmail(email, password, passwordRepeated, setErrorSignUp);
   };

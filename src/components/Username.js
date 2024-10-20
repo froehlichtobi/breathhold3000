@@ -6,8 +6,6 @@ const Username = ({ setUsername, userUid }) => {
 
   const handleSetUsername = () => {
     createUserName(userUid, usernameInput);
-    // possible problem here: if createUserName fails, then we still
-    // set the usernameInput to username (for displaying the name)
     setUsername(usernameInput);
   };
 

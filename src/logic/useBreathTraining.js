@@ -22,7 +22,7 @@ const useBreathTraining = (currentTrainingTime = 60) => {
     currentTrainingTime,
   ];
 
-  const timeFactor = 1000;
+  const timeFactor = 10;
   const timerTime = timerSeconds[timerIndex] * timeFactor;
 
   const { seconds, active, startTimer, stopTimer, setNewSeconds } =

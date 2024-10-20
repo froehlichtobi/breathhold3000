@@ -16,11 +16,11 @@ const checkForUser = async (userUid, setUsername, setIsLoadingUsername) => {
       // Create a new document with default values
       await setDoc(docRef, {
         UID: userUid,
-        username: "", // Set a default username or use a parameter to pass the username
+        username: "",
         currentTrainingTime: 40, // Default value
-        trainingTimes: [], // Default array
+        trainingTimes: [], // I will need this to implement a statistics page later
         maxTime: 0, // Default value
-        maxTimes: [], // Default array
+        maxTimes: [], // I will need this to implement a statistics page later
       });
       console.log("User created in the database with default values.");
     }
@@ -70,7 +70,7 @@ export const setNewMaxTime = async (userUid, seconds) => {
   const docRef = doc(db, "userData", userUid);
   const docSnap = await getDoc(docRef);
   await updateDoc(docRef, { maxTime: seconds });
-  window.location.reload();
+  window.location.reload(); // I know this is not optimal, I will try to fix this in the future
 };
 
 export const setNewTrainingTime = async (userUid, newTrainingTime) => {
@@ -80,5 +80,5 @@ export const setNewTrainingTime = async (userUid, newTrainingTime) => {
   await updateDoc(docRef, {
     currentTrainingTime: newTrainingTime,
   });
-  window.location.reload();
+  window.location.reload(); // I know this is not optimal, I will try to fix this in the future
 };
